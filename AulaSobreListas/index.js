@@ -51,6 +51,8 @@ function montarTabela(funcionarios) {
     });
 }
 
+//sem utilizar map e aplicando o conceito de função pura, ou seja, sem efeitos colaterais em objetos externos
+/*
 function adicionarDecimoTerceiro(funcionarios) {
     if (!funcionarios) return;
 
@@ -61,6 +63,30 @@ function adicionarDecimoTerceiro(funcionarios) {
     });
 
     return copiaFuncionarios;
+}
+*/
+
+/*utilizando o map para aplicar a mudança também sem efeitos colaterais em objetos externos.
+por padrão o map retorna um novo objeto array, por isso que não gera efeitos colaterais.
+Você pode utilizar o map e retornar um novo objeto, por exemplo
+
+//retornar um array só com o nome dos funcionários:
+funcionarios.map(funcionario => {
+    return funcionario.nome;
+});
+
+//retornar um array com nome e idade:
+funcionarios.map(funcionario => {
+    return { nomeFuncionario: funcionario.nome, idadeFuncionario: funcionario.idade }
+});
+*/
+function adicionarDecimoTerceiro(funcionarios) {
+    if (!funcionarios) return;
+
+    return funcionarios.map(funcionario => {
+        funcionario.salario = funcionario.salario * 2;
+        return funcionario;
+    });
 }
 
 funcionarios = adicionarDecimoTerceiro(funcionarios);
