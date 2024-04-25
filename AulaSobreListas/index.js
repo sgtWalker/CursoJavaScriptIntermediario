@@ -1,4 +1,4 @@
-const list = [{
+const funcionarios = [{
         nome: 'João',
         idade: 25,
         cargo: 'Desenvolvedor Pl',
@@ -30,21 +30,25 @@ const list = [{
     }
 ];
 
-function buildTable() {
-    document.querySelector('#table-body').innerHTML = '';
+function montarTabela(funcionarios) {
+    let tabela = document.querySelector('#tabela-body');
 
-    list.forEach(elemento => {
+    if (!tabela) return;
+
+    tabela.innerHTML = '';
+
+    funcionarios.forEach(funcionario => {
         let template = `
             <tr>
-                <td>${elemento.nome}</td>
-                <td>${elemento.idade}</td>
-                <td>${elemento.cargo}</td>
-                <td>R$ ${elemento.salario}</td>
+                <td>${funcionario.nome}</td>
+                <td>${funcionario.idade}</td>
+                <td>${funcionario.cargo}</td>
+                <td>R$ ${funcionario.salario}</td>
             </tr>       
         `;
 
-        document.querySelector('#table-body').insertAdjacentHTML('beforeend', template);
+        tabela.insertAdjacentHTML('beforeend', template);
     });
 }
 
-buildTable();
+montarTabela(funcionarios);
