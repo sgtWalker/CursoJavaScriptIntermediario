@@ -1,4 +1,4 @@
-const funcionarios = [{
+let funcionarios = [{
         nome: 'João',
         idade: 25,
         cargo: 'Desenvolvedor Pl',
@@ -33,7 +33,7 @@ const funcionarios = [{
 function montarTabela(funcionarios) {
     let tabela = document.querySelector('#tabela-body');
 
-    if (!tabela) return;
+    if (!tabela || !funcionarios) return;
 
     tabela.innerHTML = '';
 
@@ -51,4 +51,17 @@ function montarTabela(funcionarios) {
     });
 }
 
+function adicionarDecimoTerceiro(funcionarios) {
+    if (!funcionarios) return;
+
+    const copiaFuncionarios = JSON.parse(JSON.stringify(funcionarios));
+
+    copiaFuncionarios.forEach(funcionario => {
+        funcionario.salario = funcionario.salario * 2;
+    });
+
+    return copiaFuncionarios;
+}
+
+funcionarios = adicionarDecimoTerceiro(funcionarios);
 montarTabela(funcionarios);
