@@ -25,7 +25,7 @@ let funcionarios = [{
     {
         nome: 'Isabela',
         idade: 18,
-        cargo: 'Estagiária',
+        cargo: 'Estagiário',
         salario: 1700
     }
 ];
@@ -79,7 +79,7 @@ funcionarios.map(funcionario => {
 funcionarios.map(funcionario => {
     return { nomeFuncionario: funcionario.nome, idadeFuncionario: funcionario.idade }
 });
-*/
+
 function adicionarDecimoTerceiro(funcionarios) {
     if (!funcionarios) return;
 
@@ -90,4 +90,55 @@ function adicionarDecimoTerceiro(funcionarios) {
 }
 
 funcionarios = adicionarDecimoTerceiro(funcionarios);
+*/
+/* Bloco com os exemplos de uso do filter; */
+function aplicarFiltro(funcionarios) {
+    let funcionariosCopia = JSON.parse(JSON.stringify(funcionarios));
+
+    funcionariosCopia = filtrarPorCargo(funcionariosCopia);
+    funcionariosCopia = filtrarPorIdade(funcionariosCopia);
+
+    montarTabela(funcionariosCopia);
+}
+
+
+function filtrarPorCargo(funcionarios) {
+    const valorInput = document.querySelector('#filtroPorCargo').value;
+    let cargo;
+
+    if (valorInput === 'estagiario') {
+        cargo = 'Estagiário';
+    } else if (valorInput === 'desenvolvedorJr') {
+        cargo = 'Desenvolvedor Jr';
+    } else if (valorInput === 'desenvolvedorPl') {
+        cargo = 'Desenvolvedor Pl';
+    } else if (valorInput === 'desenvolvedorSr') {
+        cargo = 'Desenvolvedor Sr';
+    } else {
+        cargo = 'todos';
+    }
+
+    return funcionarios.filter(funcionario => {
+        if (cargo === 'todos') {
+            return true;
+        }
+
+        return funcionario.cargo === cargo;
+    });
+}
+
+function filtrarPorIdade(funcionarios) {
+    const valorInput = document.querySelector('#filtroPorIdade').value;
+    
+    return funcionarios.filter(funcionario => {
+        if (valorInput === 'maiores') {
+            return funcionario.idade >= 18;
+        } else if (valorInput === 'menores') {
+            return funcionario.idade < 18;
+        } else {
+            return true;
+        }
+    });
+}
+
 montarTabela(funcionarios);

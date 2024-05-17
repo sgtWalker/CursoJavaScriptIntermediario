@@ -10,6 +10,23 @@
 <body>
     <section>
         <h1>JS Intermediário: Tabelas!</h1>
+        <div class="filtros">
+            <select id="filtroPorCargo" onchange="aplicarFiltro(funcionarios)">
+                <option disabled selected>Filtrar por cargo</option>
+                <option value="todos">Todos</option>
+                <option value="estagiario">Estagiário</option>
+                <option value="desenvolvedorJr">Desenvolvedor Jr</option>
+                <option value="desenvolvedorPl">Desenvolvedor Pl</option>
+                <option value="desenvolvedorSr">Desenvolvedor Sr</option>
+            </select>
+
+            <select id="filtroPorIdade" onchange="aplicarFiltro(funcionarios)">
+                <option disabled selected>Filtrar por idade</option>
+                <option value="todos">Todos</option>
+                <option value="maiores">Maiores de idade</option>
+                <option value="menores">Menores de idade</option>
+            </select>
+        </div>
         <div class="tbl-header">
             <table cellpadding="0" cellspacing="0" border="0">
                 <thead>
