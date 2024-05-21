@@ -5,6 +5,19 @@
     margin-bottom: 20px;
   }
   
+  .valor-total{
+    color: white;
+    display: flex;
+    margin-top: 10px;
+    justify-content: center;
+    font-weight: lighter;
+  }
+  
+  #total{
+    font-weight: bold;
+    margin-left: 5px;
+  }
+  
   select {
     display: block;
     font-size: 12px;
@@ -72,7 +85,7 @@
   }
   
   .tbl-content {
-    height: 300px;
+    height: 240px;
     overflow-x: auto;
     margin-top: 0px;
     border: 1px solid rgba(255, 255, 255, 0.3);

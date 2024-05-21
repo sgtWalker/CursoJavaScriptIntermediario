@@ -49,6 +49,8 @@ function montarTabela(funcionarios) {
 
         tabela.insertAdjacentHTML('beforeend', template);
     });
+
+    calcularValorTotal(funcionarios);
 }
 
 //sem utilizar map e aplicando o conceito de função pura, ou seja, sem efeitos colaterais em objetos externos
@@ -101,6 +103,10 @@ function aplicarFiltro(funcionarios) {
     montarTabela(funcionariosCopia);
 }
 
+function calcularValorTotal(funcionarios) {
+    let valorTotal = funcionarios.reduce((acc, funcionario) => acc + funcionario.salario, 0);
+    document.querySelector('#total').innerHTML = valorTotal;
+}
 
 function filtrarPorCargo(funcionarios) {
     const valorInput = document.querySelector('#filtroPorCargo').value;
