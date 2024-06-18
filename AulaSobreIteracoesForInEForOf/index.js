@@ -18,7 +18,7 @@ FIFA
 */
 for(let posicao in jogos)
     console.log(jogos[posicao]);
-/* saída do console 
+/* saída do console git s
 Tibia
 Battlefield
 FIFA
