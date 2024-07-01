@@ -78,11 +78,12 @@
   ou que tenham '.' ou '-' até encontrar o caractere @, que contenham caracteres válidos (\w) até o '.' e que tenham
   com ou net e opcionalmente possa ter .br
   Resultado: email.teste@hostname.com
-
-  Validando CPF e CNPJ
-  
  */
 
+  const texto = 'O meu nome é João, e 457.724.198-66 é o CPF do segurado.';
+  const expressaoRegular = /\d{3}\.\d{3}\.\d{3}-\d{2}/mg;
+  //expressaoRegular.test(texto); //saída do console: true
+  const cpf = expressaoRegular.exec(texto)[0]; //saída para a variável: '457.724.198-66'
 
  /* Fontes */
  /*
