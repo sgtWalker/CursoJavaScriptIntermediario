@@ -10,37 +10,15 @@
     Também fornece uma definição para conceitos relacionados como CORS e a semântica de cabeçalho de origem HTTP.
 */
 
-const funcionarios = [{
-        nome: 'João',
-        idade: 25,
-        cargo: 'Desenvolvedor Pl',
-        salario: 7000
-    },
-    {
-        nome: 'Pedro',
-        idade: 17,
-        cargo: 'Estagiário',
-        salario: 1600
-    },
-    {
-        nome: 'Adriana',
-        idade: 28,
-        cargo: 'Desenvolvedor Sr',
-        salario: 12000
-    },
-    {
-        nome: 'Carol',
-        idade: 23,
-        cargo: 'Desenvolvedor Pl',
-        salario: 7500
-    },
-    {
-        nome: 'Isabela',
-        idade: 18,
-        cargo: 'Estagiário',
-        salario: 1700
-    }
-];
+const funcionarios = [];
+
+function getFuncionarios() {
+    fetch('https://6682b6514102471fa4c7f34f.mockapi.io/api/funcionarios')
+        .then(response => response.json())
+        .then(responseList => {
+            
+        });
+}
 
 function buildTable() {
     document.querySelector('#table-body').innerHTML = '';
@@ -61,5 +39,6 @@ function buildTable() {
 
 buildTable();
 /* Fontes: 
-https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API
+    https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API
+    https://mockapi.io/
 */
