@@ -10,19 +10,27 @@
     Também fornece uma definição para conceitos relacionados como CORS e a semântica de cabeçalho de origem HTTP.
 */
 
-const funcionarios = [];
+let funcionarios = [];
 
 function getFuncionarios() {
     fetch('https://6682b6514102471fa4c7f34f.mockapi.io/api/funcionarios')
-        .then(response => response.json())
+        .then(response => response.ok ? response.json() : _throw(response.status))
         .then(responseList => {
-            
-        });
+            funcionarios = responseList;
+            buildTable();
+        })
+        .catch(erro => erroHandler(erro.message));
 }
 
 function buildTable() {
     document.querySelector('#table-body').innerHTML = '';
 
+    if (funcionarios.length === 0) {
+        document.querySelector('#table-body')
+        .insertAdjacentHTML('beforeend', '<span>Não existem dados para serem exibidos.</span>');
+        return;
+    }
+       
     funcionarios.forEach(el => {
         let template = `
         <tr>
@@ -37,8 +45,10 @@ function buildTable() {
     });
 }
 
-buildTable();
+getFuncionarios();
+
 /* Fontes: 
     https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API
     https://mockapi.io/
+    https://developer.mozilla.org/pt-BR/docs/Web/HTTP/Status
 */
