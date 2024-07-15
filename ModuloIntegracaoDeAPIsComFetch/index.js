@@ -46,6 +46,61 @@ function buildTable() {
 }
 
 getFuncionarios();
+const _headers = {
+    'Content-Type': 'application/json'
+}
+/* utilizando os outros verbos http com fetch api */
+/* POST */
+function incluirFuncionario() {  
+    let init = {
+        headers: _headers,
+        body: JSON.stringify({ 
+            "nome":"Alessandra",
+            "idade":31,
+            "cargo":"Desenvolvedor Pl",
+            "salario":7000
+        }),
+        method: 'POST'
+    }
+    
+    fetch('https://6682b6514102471fa4c7f34f.mockapi.io/api/funcionarios', init)
+        .then(response => response.ok ? response.json() : _throw(response.status))
+        .then(response => getFuncionarios())
+        .catch(erro => erroHandler(erro.message)); 
+}
+
+/* PUT */
+function alterarFuncionario(id) {    
+    let init = {
+        headers: _headers,
+        body: JSON.stringify({ 
+            "nome":"Alessandra Alves",
+            "idade":32,
+            "cargo":"Desenvolvedor Pl",
+            "salario":7000
+        }),
+        method: 'PUT'
+    }
+    
+    fetch(`https://6682b6514102471fa4c7f34f.mockapi.io/api/funcionarios/${id}`, init)
+        .then(response => response.ok ? response.json() : _throw(response.status))
+        .then(response => getFuncionarios())
+        .catch(erro => erroHandler(erro.message)); 
+}
+
+/* DELETE */
+function removerFuncionario(id) {    
+    let init = {
+        headers: _headers,
+        method: 'DELETE'
+    }
+    
+    fetch(`https://6682b6514102471fa4c7f34f.mockapi.io/api/funcionarios/${id}`, init)
+        .then(response => response.ok ? response.json() : _throw(response.status))
+        .then(response => getFuncionarios())
+        .catch(erro => erroHandler(erro.message)); 
+}
+
 
 /* Fontes: 
     https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API
