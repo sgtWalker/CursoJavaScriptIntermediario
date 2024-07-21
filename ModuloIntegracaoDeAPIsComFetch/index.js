@@ -102,6 +102,67 @@ function removerFuncionario(id) {
 }
 
 
+/* Como refatorar o código removendo callback hells? */
+/*
+Primeiro precisamos entender o que são os callbacks hell. Callback hell podem ser encontrados em cenários que várias functions podem ser chamadas em cascatas pela dependência uma da outra.
+Sendo assim, imagine o cenário que uma function precisa chamar mais de uma rota em uma API para obter objetos e tratá-los.
+Neste cenário, podemos encontrar códigos sendo chamados de uma forma na qual gere callbacks hell como o exemplo abaixo:
+*/
+const apiUrl = 'https://api.com.br/api/';
+
+function exemploCallbackhell() {
+    getListagemFetch('funcionarios', function(listagemFuncionarios) {
+        getListagemFetch('funcionariosCargo', function(listagemCargo) {
+            getListagemFetch('funcionariosNota', function(listagemNota) {
+                getListagemFetch('funcionariosSalario', function(listagemSalario) {
+                    console.log(listagemFuncionarios);
+                    console.log(listagemCargo);
+                    console.log(listagemNota);
+                    console.log(listagemSalario);
+                })
+            })
+        })
+    })
+}
+
+function getListagemFetch(endpoint, callback) {
+    return fetch(`${apiUrl}${endpoint}`)
+        .then(res => res.json())
+        .then(listagem => {
+            callback(listagem);
+    });
+}
+
+/* Podemos perceber que geramos um código confuso e 'hadouken', muito encadeado. Este tipo de código não é o ideal
+para uma fácil leitura e manutenção e esse foi um exemplo de callback hell.
+Agora vamos refatorar essa function para solucionar esse problema sem gerar um callback hell.
+Exemplo: */
+
+function exemploSemCallbackhell() {
+    getFuncionariosAsync();
+}
+
+function getListFetch(endpoint) {
+    return fetch(`${apiUrl}${endpoint}`)
+        .then(res => res.json())
+        .then(listagem => listagem);
+}
+
+async function getFuncionariosAsync() {
+    const listagemFuncionarios = await getListFetch('funcionarios');
+    const listagemCargo = await getListFetch('funcionariosCargo');
+    const listagemNota = await getListFetch('funcionariosNota');
+    const listagemSalario = await getListFetch('funcionariosSalario');
+
+    console.log(listagemFuncionarios);
+    console.log(listagemCargo);
+    console.log(listagemNota);
+    console.log(listagemSalario);
+}
+
+/* Ao utilizat o async/await, conseguimos eliminar o callback hell, tornando o código mais legível e de fácil manutenção. */
+
+
 /* Fontes: 
     https://developer.mozilla.org/pt-BR/docs/Web/API/Fetch_API
     https://mockapi.io/
